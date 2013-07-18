@@ -23,24 +23,24 @@
             <div data-role="header" data-position="fixed">
                 <h1>Range Report</h1>
             </div>
-            <section>
-                <br>
-                <a href="#createReport" class="clickable"><img src="">CTA</a>
-                <br>
+            <section class="clickable">
+                <h3>Log In to Upload Reports to Instagram...</h3>
+                <form action="" id="logInForm">
+                    <div data-role="fieldcontain">
+                        <label for="uname">Username:</label>
+                        <input type="text" id="uname" value="" style="" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="pssWrd">Password:</label>
+                        <input type="password" id="pssWrd" value="" style="" />
+                    </div>
+                    <a href="#homePage" type="submit" id="logInSubmit" data-role="button" style="font-style:bold"><strong>Log In</strong></a>
+                </form>
             </section>
             <section class="clickable">
-                <h3>Display Reports By...</h3>
-                    <div class="ui-grid-a">
-                        <div class="ui-block-a">
-                            <a href="#display" data-role="button" id="displayBugIn"><strong><img src=""><br>Date</strong></a>
-                        </div>
-                        <div class="ui-block-b">
-                            <a href="#display" data-role="button" id="displayBugOut"><strong><img src="">Firearm<br>Model</strong></a>
-                        </div>
-                    </div>
-            </section>
-            <section>
-                <a href="#aboutPage" data-role="button" class="clickable">About Page</a>
+                <a href="#createReport" data-role="button" class="reportPage">Add a Report</a>
+                <a href="#displayPage" data-role="button" id="dispRPT">Display Reports</a>
+                <a href="#aboutPage" data-role="button">About Page</a>
             </section>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar" class="nav">
@@ -49,7 +49,7 @@
                             <a href="#homePage" data-icon="home" class="ui-btn-active" >Home<br>Page</a>
                         </li>
                         <li>
-                            <a href="#createReport" id="reportPage" data-icon="plus">Add a<br>Report</a>
+                            <a href="#createReport" class="reportPage" data-icon="plus">Add a<br>Report</a>
                         </li>
                         <li>
                             <a href="#aboutPage" data-icon="info">About<br>Page</a>
@@ -64,28 +64,53 @@
             <div data-role="header" data-position="fixed">
                 <h1>Range Report</h1>
             </div>
-            <form action="" id="securityForm"  class="clickable">
-                <section class="clickable">
+            <form action="" id="reportForm"  class="clickable">
+                <section id="images">
+                    <a href="#" id="imagePhotos" data-role="button" data-inline="true">Add Image From Photos</a>
+                    <a href="#" id="imageCamera" data-role="button" data-inline="true">Add Image From Camera</a>
+                </section>
+                <section>
                     <div data-role="fieldcontain">
                         <label for="manufacturer">Manufacturer:</label>
-                        <input type="text" id="manufacturer" value="" style="" />
+                        <input type="text" class="input" id="manufacturer" value="Ruger" />
                     </div>
                     <div data-role="fieldcontain">
                         <label for="model">Model:</label>
-                        <input type="text" id="model" value="" style="" />
+                        <input type="text" class="input" id="model" value="SR22" />
                     </div>
                     <div data-role="fieldcontain">
                         <label for="distance">Distance(Yards):</label>
-                        <input type="text" id="distance" value="" style="" />
+                        <input type="text" class="input" id="distance" value="10" />
                     </div>
                     <div data-role="fieldcontain">
                         <label for="notes">Notes:</label>
-                        <textarea id="notes"></textarea>
+                        <textarea class="input" id="notes">Two 5 shot Groups.</textarea>
                     </div>
                 </section>
                 <section>
-                    <a href="#homePage" type="submit" id="submit" data-role="button" style="font-style:bold"><strong>Save Report</strong></a>
-                    <a href="#homePage" id="cancel" data-role="button">Cancel</a>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <legend>Weather Data:</legend>
+                            <label for="weather">Auto Fill</label>
+                            <input type="checkbox" class="input" name="checkbox" id="weather" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="temperature">Temperature(F):</label>
+                        <input type="text" class="input" id="temperature" value="85" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="humidity">Humidity:</label>
+                        <input type="text" class="input" id="humidity" value="80%" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="windSpeed">Wind Speed(mph):</label>
+                        <input type="text" class="input" id="windSpeed" value="5" />
+                    </div>
+                </section>
+                <section>
+                    <a href="#homePage" type="submit" id="submit" data-role="button" style="font-style:bold" data-inline="true"><strong>Save Report</strong></a>
+                    <a href="#homePage" id="cancel" data-role="button" data-inline="true">Cancel</a>
                 </section>
             </form>
             <div data-role="footer" data-position="fixed">
@@ -95,7 +120,7 @@
                             <a href="#homePage" data-icon="home">Home<br>Page</a>
                         </li>
                         <li>
-                            <a href="#createReport" id="reportPage" data-icon="plus" class="ui-btn-active" >Add a<br>Report</a>
+                            <a href="#createReport" class="reportPage" data-icon="plus" class="ui-btn-active" >Add a<br>Report</a>
                         </li>
                         <li>
                             <a href="#aboutPage" data-icon="info">About<br>Page</a>
@@ -110,17 +135,18 @@
             <div data-role="header" data-position="fixed">
                 <h1>Range Report</h1>
             </div>
-            <section>
-                <ul id="displayReports"></ul>
+            <section id="display">
+                <a href="#homePage" data-role="button" id="clearLoc" class="clickable">Delete All Reports</a>
+                <ul id="displayReports" data-role="listview"></ul>
             </section>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar" class="nav">
                     <ul>
                         <li>
-                            <a href="#homePage" data-icon="home" class="ui-btn-active" >Home<br>Page</a>
+                            <a href="#homePage" data-icon="home" >Home<br>Page</a>
                         </li>
                         <li>
-                            <a href="#createReport" id="reportPage" data-icon="plus">Add a<br>Report</a>
+                            <a href="#createReport" class="reportPage" data-icon="plus">Add a<br>Report</a>
                         </li>
                         <li>
                             <a href="#aboutPage" data-icon="info">About<br>Page</a>
@@ -146,7 +172,7 @@
                             <a href="#homePage" data-icon="home" >Home<br>Page</a>
                         </li>
                         <li>
-                            <a href="#createReport" id="reportPage" data-icon="plus">Add a<br>Report</a>
+                            <a href="#createReport" class="reportPage" data-icon="plus">Add a<br>Report</a>
                         </li>
                         <li>
                             <a href="#aboutPage" data-icon="info" class="ui-btn-active" >About<br>Page</a>
@@ -156,12 +182,13 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="cordova.js"></script>
+ <!--       <script type="text/javascript" src="cordova.js"></script>-->
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script type="text/javascript" src="js/json.js"></script>
         <script type="text/javascript" src="js/mainjavascript.js"></script>
-        <script type="text/javascript">
+ <!--       <script type="text/javascript">
             app.initialize();
-        </script>
+        </script>-->
     </body>
 </html>
