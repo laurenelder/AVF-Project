@@ -23,24 +23,14 @@
             <div data-role="header" data-position="fixed">
                 <h1>Range Report</h1>
             </div>
-            <section class="clickable">
-                <h3>Log In to Upload Reports to Instagram...</h3>
-                <form action="" id="logInForm">
-                    <div data-role="fieldcontain">
-                        <label for="uname">Username:</label>
-                        <input type="text" id="uname" value="" style="" />
-                    </div>
-                    <div data-role="fieldcontain">
-                        <label for="pssWrd">Password:</label>
-                        <input type="password" id="pssWrd" value="" style="" />
-                    </div>
-                    <a href="#homePage" type="submit" id="logInSubmit" data-role="button" style="font-style:bold"><strong>Log In</strong></a>
-                </form>
-            </section>
-            <section class="clickable">
-                <a href="#createReport" data-role="button" class="reportPage">Add a Report</a>
-                <a href="#displayPage" data-role="button" id="dispRPT">Display Reports</a>
-                <a href="#aboutPage" data-role="button">About Page</a>
+            <h3>Log In to Upload Reports to Instagram...</h3>
+            <section>
+                <ul>
+                    <a href="#homePage" id="logInSubmit" class="lColumn" data-role="button">Log In</a>
+                    <a href="#aboutPage" class="lColumn"  data-role="button">About Page</a>
+                    <a href="#createReport" data-role="button" class="reportPage rColumnTop">Add a Report</a>
+                    <a href="#displayPage" data-role="button" id="dispRPT" class="rColumnBottom">Display Reports</a>
+                </ul>
             </section>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar" class="nav">
