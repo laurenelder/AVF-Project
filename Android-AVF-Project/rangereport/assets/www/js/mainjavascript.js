@@ -18,11 +18,27 @@ $("#createReport").on("pageinit", function() {
 	$("#imageCamera").click(function() {
 
 	});
-	$("#weather").on("change", function() {
-
-	});
+	$("#weather").change(function() {
+		$.ajax({ 
+			url : "http://api.wunderground.com/api/521e1e1e0e1cd815/geolookup/conditions/q/FL/Orlando.json", 
+			dataType : "jsonp", 
+			success : function(parsed_json) { 
+				console.log(parsed_json);
+				var location 	= parsed_json['location']['city']; 
+				var tempF 		= parsed_json['current_observation']['temp_f']; 
+				var HUMIDITY 	= parsed_json['current_observation']['relative_humidity'];
+				var WINDSPEED	= parsed_json['current_observation']['wind_mph'];
+				$("#temperature").css("color", "#000000");
+				$("#temperature").val(tempF);
+				$("#humidity").css("color", "#000000");
+				$("#humidity").val(HUMIDITY);
+				$("#windSpeed").css("color", "#000000");
+				$("#windSpeed").val(WINDSPEED);
+			} 
+		}); 
+	}); 
 	$("#submit").click(function() {
-
+		storeData();
 	});
 	$(".reportPage").click(function() {
 		resetFields();
