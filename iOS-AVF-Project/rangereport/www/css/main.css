@@ -9,3 +9,45 @@ button {
 	margin-right: 10px;
 	margin-left: 10px;
 }
+@media screen and (min-width: 400px) {
+	.lColumn {
+		width: 90%;
+		vertical-align: center;
+		display: block;
+	}
+	.rColumnTop {
+		width: 90%;
+		vertical-align: center;
+		display: block;
+	}
+	.rColumnBottom {
+		width: 90%;
+		vertical-align: center;
+		display: block;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.lColumn {
+		width: 45%;
+		display: inline-block;
+		margin-right: 2.5%;
+		margin-left: 2.5%;
+		float: left;
+	}
+	.rColumnTop {
+		width: 45%;
+		display: inline-block;
+		margin-right: 2.5%;
+		margin-left: 2.5%;
+		margin-top: -102px;
+		float: right;
+	}
+	.rColumnBottom {
+		width: 45%;
+		display: inline-block;
+		margin-right: 2.5%;
+		margin-left: 2.5%;
+		margin-top: -47px;
+		float: right;
+	}
+}
