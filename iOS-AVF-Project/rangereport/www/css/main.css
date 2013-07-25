@@ -1,3 +1,10 @@
+@media all and (orientation: portrait) {  
+  body div { width: 100%; }  
+}  
+  
+@media all and (orientation: landscape) {  
+  body div { width: 100%; }  
+} 
 .clickable {
 	margin-right: 10px;
 	margin-left: 10px;
@@ -10,44 +17,86 @@ button {
 	margin-left: 10px;
 }
 @media screen and (min-width: 400px) {
-	.lColumn {
+	.lColumnTop {
 		width: 90%;
-		vertical-align: center;
 		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.lColumnBottom {
+		width: 90%;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
 	}
 	.rColumnTop {
 		width: 90%;
-		vertical-align: center;
 		display: block;
+		margin-right: auto;
+		margin-left: auto;
 	}
 	.rColumnBottom {
 		width: 90%;
-		vertical-align: center;
 		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.formButtonsL {
+		width: 90%;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.formButtonsR {
+		width: 90%;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
 	}
 }
 @media screen and (min-width: 1000px) {
-	.lColumn {
+	.lColumnTop {
 		width: 45%;
-		display: inline-block;
-		margin-right: 2.5%;
-		margin-left: 2.5%;
+		display: inline;
+		margin-right: auto;
+		margin-left: 3%;
 		float: left;
+	}
+	.lColumnBottom {
+		width: 45%;
+		display: inline;
+		margin-right: auto;
+		margin-left: 3%;
+		float: left;
+		vertical-align: top;
 	}
 	.rColumnTop {
 		width: 45%;
-		display: inline-block;
-		margin-right: 2.5%;
-		margin-left: 2.5%;
-		margin-top: -102px;
+		display: inline;
+		margin-right: 3%;
+		margin-left: auto;
 		float: right;
 	}
 	.rColumnBottom {
 		width: 45%;
-		display: inline-block;
-		margin-right: 2.5%;
-		margin-left: 2.5%;
-		margin-top: -47px;
+		display: block;
+		margin-right: 3%;
+		margin-left: auto;
+		float: right;
+		vertical-align: top;
+	}
+	.formButtonsL {
+		width: 45%;
+		display: inline;
+		margin-right: auto;
+		margin-left: 3%;
+		float: left;
+	}
+	.formButtonsR {
+		width: 45%;
+		display: inline;
+		margin-right: 3%;
+		margin-left: auto;
 		float: right;
 	}
 }
