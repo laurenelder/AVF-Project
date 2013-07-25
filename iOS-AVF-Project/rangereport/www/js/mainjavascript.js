@@ -153,18 +153,19 @@ function onDeviceReady() {
 	$("#createReport").on("pageinit", function() {
 	//	var pictureSource = navigator.camera.PictureSourceType;
 	//	var destinationType = navigator.camera.DestinationType;
-		$("#imagePhotos").click(function() {
+		$("#imagePhotos").on("click", function() {
 			var onPhotoSuccess = function(photoImageURI) {
+				alert(photoImageURI);
 				$("#images").append('<img id="cameraImage" src="' + photoImageURI + '"></img>');
 			};
 			var onPhotoFail = function(message) {
 				console.log(message);
 			};
-			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: FILE_URI, sourceType: pictureSource.PHOTOLIBRARY });
+			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
 		});
 		$("#imageCamera").click(function() {
 			alert("Button Works!!");
-			var onSuccess = function(imageURI) {
+			var onCamSuccess = function(imageURI) {
 			    // Uncomment to view the base64 encoded image data
 			    console.log(imageURI);
 			    var image = document.getElementById('myImage');
@@ -186,7 +187,7 @@ function onDeviceReady() {
 			var onCamFail = function(message) {
 				console.log(message);
 			};
-			navigator.camera.getPicture(onSuccess, onCamFail, { quality: 50, destinationType: destinationType.FILE_URI });
+			navigator.camera.getPicture(onCamSuccess, onCamFail, { quality: 50, destinationType: destinationType.FILE_URI });
 		});
 		$("#weather").change(function() {
 			var onSuccess = function(position) {
