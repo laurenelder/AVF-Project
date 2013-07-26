@@ -125,7 +125,30 @@
             </div>
             <section id="display">
                 <a href="#homePage" data-role="button" id="clearLoc" class="clickable">Delete All Reports</a>
-                <ul id="displayReports" data-role="listview"></ul>
+            </section>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" class="nav">
+                    <ul>
+                        <li>
+                            <a href="#homePage" data-icon="home" >Home<br>Page</a>
+                        </li>
+                        <li>
+                            <a href="#createReport" class="reportPage" data-icon="plus">Add a<br>Report</a>
+                        </li>
+                        <li>
+                            <a href="#aboutPage" data-icon="info">About<br>Page</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Details Page -->
+        <div data-role="page" id="displayDetailsPage">
+            <div data-role="header" data-position="fixed">
+                <h1>Range Report</h1>
+            </div>
+            <section id="displayDetails">
             </section>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar" class="nav">
@@ -170,8 +193,9 @@
             </div>
         </div>
 
- <!--       <script type="text/javascript" src="cordova.js"></script>-->
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="https://instagram.com/oauth/authorize/?client_id=104b89ecd4154b7888cd4da9d9365ee2&redirect_uri=http://www.reangereport.com/index&response_type=token"></script>
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
         <script type="text/javascript" src="js/json.js"></script>
