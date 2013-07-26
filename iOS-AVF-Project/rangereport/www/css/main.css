@@ -17,6 +17,22 @@ button {
 	margin-left: 10px;
 }
 @media screen and (min-width: 400px) {
+	.displayImage {
+		display: block;
+		height: 300px;
+		width: 300px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.cameraImage {
+		display: block;
+		height: 200px;
+		width: 200px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.lColumnTop {
 		width: 90%;
 		display: block;
@@ -55,6 +71,22 @@ button {
 	}
 }
 @media screen and (min-width: 1000px) {
+	.displayImage {
+		display: block;
+		height: 400px;
+		width: 400px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.cameraImage {
+		display: block;
+		height: 300px;
+		width: 300px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.lColumnTop {
 		width: 45%;
 		display: inline;

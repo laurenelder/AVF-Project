@@ -3,11 +3,6 @@ function onDeviceReady() {
 
 	// Global Variables
 	var staticJSON = json;
-/*	var pictureSource;
-	var destinationType;
-	var pictureSource = navigator.camera.PictureSourceType;
-	var destinationType = navigator.camera.DestinationType;
-*/
 
 	// Clear Fields Function
 	var resetFields = function() {
@@ -18,19 +13,20 @@ function onDeviceReady() {
 
 	// Store Data Function
 	var storeData = function(key) {
-		var month		= new Date().getMonth() + 1;
-		var day 		= new Date().getDate();
-		var year 		= new Date().getFullYear();
-		var currentDate = month + "/" + day + "/" + year;
-		var	item		= {};
-		item.date		= ["Date:            ", currentDate];
-		item.mft		= ["Manufacturer:    ", $("#manufacturer").val()];
-		item.mod		= ["Model:           ", $("#model").val()];
-		item.dist		= ["Distance(Yards): ", $("#distance").val()];
-		item.temp		= ["Temperature(F):  ", $("#temperature").val()];
-		item.humid		= ["Humidity:        ", $("#humidity").val()];
-		item.wind		= ["Wind Speed(mph): ", $("#windSpeed").val()];
-		item.note		= ["Notes:           ", $("#notes").val()];
+		var month		 = new Date().getMonth() + 1;
+		var day 		 = new Date().getDate();
+		var year 		 = new Date().getFullYear();
+		var currentDate  = month + "/" + day + "/" + year;
+		var	item		 = {};
+		item.reportImage = [""				   ,'<img class="displayImage" src="' + $(".cameraImage").attr("src") + '"></img>'];
+		item.date		 = ["Date:            ", currentDate];
+		item.mft	 	 = ["Manufacturer:    ", $("#manufacturer").val()];
+		item.mod	 	 = ["Model:           ", $("#model").val()];
+		item.dist		 = ["Distance(Yards): ", $("#distance").val()];
+		item.temp		 = ["Temperature(F):  ", $("#temperature").val()];
+		item.humid		 = ["Humidity:        ", $("#humidity").val()];
+		item.wind		 = ["Wind Speed(mph): ", $("#windSpeed").val()];
+		item.note		 = ["Notes:           ", $("#notes").val()];
 		if (!key) {
 			var NEWid				= Math.floor(Math.random() * 1000001);
 			window.localStorage.setItem(NEWid, JSON.stringify(item));
@@ -70,8 +66,10 @@ function onDeviceReady() {
 		}; 
 	};
 
-	// Display Details Function
-	var displayDetailData = function() {
+	// Display Function
+	var displayData = function() {
+		$("#display").append('<ul id="displayReports" data-role="listview"></ul>');
+		$("#displayDetailedReports").remove();
 		if (window.localStorage.length === 0) {
 			alert("There are no reports to display. Loading Static Data.");
 			autoFillData();
@@ -82,32 +80,39 @@ function onDeviceReady() {
 			var obj = JSON.parse(value);
 			var liID = 1111 + (i);
 			var ulID = key;
-			console.log(key);
-			console.log(liID);
-			$("#displayReports").append('<li id="' + liID + '">' + obj.mft[1] + ' - ' + obj.mod[1] + ' - ' + obj.date[1] + '</li>');
-			$("#" + liID + "").append("<ul id=" + ulID + "></ul>");
-			var content = "";
-			for (var n in obj) {
-				content += "<li>";
-				content += obj[n][0] + " " + obj[n][1];
-				content += "</li>";
-			};
-			$("#" + ulID + "").append(content);
-			$("#" + ulID + "").append(
-				"<a href='#createReport' data-role='button' data-key='" + ulID + "' class='clickable edit' >Edit Report</a>" + 
-				"<a href='#homePage' data-role='button' data-key='" + ulID + "' class='clickable delete' >Delete Report</a>" +
-				"<a href='#' data-role='button' data-key='" + ulID + "' class='clickable upload' >Upload Report</a>"
-			);
+			$("#displayReports").append('<li><a href="#displayDetailsPage" id="' + ulID + '" class="linkToData">' + obj.mft[1] + ' - ' + obj.mod[1] + ' - ' + obj.date[1] + '</a></li>');
 		};
-		$("displayPage").on('pageinit', function() {
-			$("#displayReports").listview('refresh');
-		});
 	};
 
-	// Device Ready Function
-
-
-
+	// Display Details Function
+	var displayDetailedData = function(dataKey) {
+		for (var i = 0, j = window.localStorage.length; i < j; i++) {
+			var detailedkey = window.localStorage.key(i);
+			var detailedvalue = window.localStorage.getItem(detailedkey);
+			var detailedobj = JSON.parse(detailedvalue);
+			var liID = 1 + (i);
+			if(dataKey == detailedkey) {
+				var buttonKey = dataKey;
+				$("#displayDetails")
+					.append(detailedobj.reportImage[1])
+					.append('<ul id="displayDetailedReports" data-role="listview"></ul>');
+				var content = "";
+				for (var n in detailedobj) {
+					content += '<li id="' + liID + '">';
+					content += detailedobj[n][0] + " " + detailedobj[n][1];
+					content += '</li>';
+				};
+				$("#displayDetailedReports").append(content);
+				$("#displayDetailedReports").append(
+				"<a href='#displayPage' data-role='button' class='clickable' >Back</a>" + 
+				"<a href='#createReport' data-role='button' data-key='" + buttonKey + "' class='clickable edit' >Edit Report</a>" + 
+				"<a href='#homePage' data-role='button' data-key='" + buttonKey + "' class='clickable delete' >Delete Report</a>" +
+				"<a href='#' data-role='button' data-key='" + buttonKey + "' class='clickable upload' >Upload Report</a>");
+				$("#1").remove();
+			}
+		$("#displayDetailedReports").listview('refresh');
+		};
+	};
 
 	// Delete Item Function
 	var deleteItem = function(dButton) {
@@ -139,11 +144,23 @@ function onDeviceReady() {
 	$("#homePage").on("pageinit", function() {
 		$("#logInSubmit").click(function() {
 			var networkState = navigator.network.connection.type;
-			alert(networkState);
+			if(networkState != "wifi") {
+				alert("Please Connect to a Wireless Network to Connect to Instagram.");
+			} else {
+				$.ajax({ 
+					url : "https://api.instagram.com/v1/users/1574083/?access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d", 
+					dataType : "jsonp", 
+					success : function(instagram_json) { 
+						var instagram = JSON.parse(instagram_json);
+						console.log(instagram_json);
+						//http://www.rangereport.com/index#access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d
+					} 
+				}); 
+			}
 		});
 		$("#dispRPT").on('click', function() {
-			$("#displayReports").children().remove();
-			displayDetailData();
+			$("#displayReports").remove();
+			displayData();
 		});
 		$(".reportPage").click(function() {
 			resetFields();
@@ -151,45 +168,31 @@ function onDeviceReady() {
 	});
 
 	$("#createReport").on("pageinit", function() {
-	//	var pictureSource = navigator.camera.PictureSourceType;
-	//	var destinationType = navigator.camera.DestinationType;
-		$("#imagePhotos").click(function() {
+		$("#imagePhotos").on("click", function() {
 			var onPhotoSuccess = function(photoImageURI) {
-				$("#images").append('<img id="cameraImage" src="' + photoImageURI + '"></img>');
+				$("#images").append('<img class="cameraImage" src="' + photoImageURI + '"></img>');
 			};
 			var onPhotoFail = function(message) {
 				console.log(message);
 			};
-			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: FILE_URI, sourceType: pictureSource.PHOTOLIBRARY });
+			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
 		});
 		$("#imageCamera").click(function() {
 			alert("Button Works!!");
-			var onSuccess = function(imageURI) {
-			    // Uncomment to view the base64 encoded image data
-			    console.log(imageURI);
-			    var image = document.getElementById('myImage');
-	   			image.src = imageURI;
-			    $("#images").append('<img id="cameraImage" src="' + imageURI + '"></img>');
-			    // Get image handle
-			    //
-			    //var smallImage = document.getElementById('smallImage');
-
-			    // Unhide image elements
-			    //
-			    //smallImage.style.display = 'block';
-
-			    // Show the captured photo
-			    // The inline CSS rules are used to resize the image
-			    //
-			    //smallImage.src = "data:image/jpeg;base64," + imageData;
+			var onCamSuccess = function(imageURI) {
+			    $("#images").append('<img class="cameraImage" src="' + imageURI + '"></img>');
 			};
 			var onCamFail = function(message) {
 				console.log(message);
 			};
-			navigator.camera.getPicture(onSuccess, onCamFail, { quality: 50, destinationType: destinationType.FILE_URI });
+			navigator.camera.getPicture(onCamSuccess, onCamFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
 		});
 		$("#weather").change(function() {
-			var onSuccess = function(position) {
+			var networkState = navigator.network.connection.type;
+			if(networkState == "none") {
+				alert("Please Connect to a Network to Auto Fill Weather Data.");
+			} else {
+				var onSuccess = function(position) {
 				$.ajax({ 
 					url : "http://api.wunderground.com/api/521e1e1e0e1cd815/geolookup/q/" + position.coords.latitude + "," + position.coords.longitude + ".json", 
 					dataType : "jsonp", 
@@ -218,6 +221,7 @@ function onDeviceReady() {
 				console.log(error.message);
 			};
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			}
 		}); 
 		$("#submit").click(function() {
 			storeData();
@@ -234,6 +238,22 @@ function onDeviceReady() {
 	$("#displayPage").on("pageinit", function() {
 		$("#clearLoc").click(function() {
 			clearLocal();
+		});
+		$(".linkToData").click(function() {
+			displayDetailedData($(this).attr("id"));
+		});
+
+		$(".reportPage").click(function() {
+			resetFields();
+		});
+	});
+
+	$("#displayDetailsPage").on("pageinit", function() {
+		$("#clearLoc").click(function() {
+			clearLocal();
+		});
+		$(".linkToData").click(function() {
+			displayDetailedData($(this).attr("id"));
 		});
 		$(".edit").click(function() {
 			var editButton = $(this).data("key");

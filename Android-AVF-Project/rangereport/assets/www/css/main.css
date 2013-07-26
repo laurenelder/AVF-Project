@@ -17,6 +17,22 @@ button {
 	margin-left: 10px;
 }
 @media screen and (min-width: 400px) {
+	.displayImage {
+		display: block;
+		height: 300px;
+		width: 300px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.cameraImage {
+		display: block;
+		height: 200px;
+		width: 200px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.lColumnTop {
 		width: 90%;
 		display: block;
@@ -36,6 +52,18 @@ button {
 		margin-left: auto;
 	}
 	.rColumnBottom {
+		width: 90%;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.formButtonsL {
+		width: 90%;
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.formButtonsR {
 		width: 90%;
 		display: block;
 		margin-right: auto;
@@ -43,6 +71,22 @@ button {
 	}
 }
 @media screen and (min-width: 1000px) {
+	.displayImage {
+		display: block;
+		height: 400px;
+		width: 400px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.cameraImage {
+		display: block;
+		height: 300px;
+		width: 300px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.lColumnTop {
 		width: 45%;
 		display: inline;
@@ -72,5 +116,19 @@ button {
 		margin-left: auto;
 		float: right;
 		vertical-align: top;
+	}
+	.formButtonsL {
+		width: 45%;
+		display: inline;
+		margin-right: auto;
+		margin-left: 3%;
+		float: left;
+	}
+	.formButtonsR {
+		width: 45%;
+		display: inline;
+		margin-right: 3%;
+		margin-left: auto;
+		float: right;
 	}
 }
