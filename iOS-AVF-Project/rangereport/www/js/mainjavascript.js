@@ -143,20 +143,21 @@ function onDeviceReady() {
 
 	$("#homePage").on("pageinit", function() {
 		$("#logInSubmit").click(function() {
-			var networkState = navigator.network.connection.type;
-			if(networkState != "wifi") {
-				alert("Please Connect to a Wireless Network to Connect to Instagram.");
-			} else {
+	//		var networkState = navigator.network.connection.type;
+	//		if(networkState != "wifi") {
+	//			alert("Please Connect to a Wireless Network to Connect to Instagram.");
+	//		} else {
 				$.ajax({ 
-					url : "https://api.instagram.com/v1/users/1574083/?access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d", 
+					url : "https://instagram.com/oauth/authorize/?client_id=104b89ecd4154b7888cd4da9d9365ee2&redirect_uri=http://www.rangereport.com/index&response_type=token", 
 					dataType : "jsonp", 
 					success : function(instagram_json) { 
+						console.log(instagram_json)
 						var instagram = JSON.parse(instagram_json);
-						console.log(instagram_json);
+						console.log(instagram);
 						//http://www.rangereport.com/index#access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d
 					} 
 				}); 
-			}
+	//		}
 		});
 		$("#dispRPT").on('click', function() {
 			$("#displayReports").remove();
@@ -178,7 +179,6 @@ function onDeviceReady() {
 			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
 		});
 		$("#imageCamera").click(function() {
-			alert("Button Works!!");
 			var onCamSuccess = function(imageURI) {
 			    $("#images").append('<img class="cameraImage" src="' + imageURI + '"></img>');
 			};
