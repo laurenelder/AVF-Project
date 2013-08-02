@@ -142,28 +142,38 @@ function onDeviceReady() {
 	};
 
 	$("#homePage").on("pageinit", function() {
-		$("#logInSubmit").click(function() {
-			var networkState = navigator.network.connection.type;
-			if(networkState != "wifi") {
-				alert("Please Connect to a Wireless Network to Connect to Instagram.");
-			} else {
-				$.ajax({ 
-					url : "https://api.instagram.com/v1/users/1574083/?access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d", 
-					dataType : "jsonp", 
-					success : function(instagram_json) { 
-						var instagram = JSON.parse(instagram_json);
-						console.log(instagram_json);
-						//http://www.rangereport.com/index#access_token=471459235.f59def8.b8f40a3e3a014180b4ca0b38970de94d
-					} 
-				}); 
-			}
-		});
 		$("#dispRPT").on('click', function() {
 			$("#displayReports").remove();
 			displayData();
 		});
 		$(".reportPage").click(function() {
 			resetFields();
+		});
+		$("#theInstagramButton").click(function() {
+			$("#loadInstagram").empty();
+		});
+	});
+
+	$("#instagramPage").on("pageinit", function() {
+		$(".loadInstagramButton").click(function() {
+			var networkState = navigator.network.connection.type;
+			if(networkState != "wifi") {
+				alert("Please Connect to a Wireless Network to Connect to Instagram.");
+			} else {
+				$.ajax({
+					url : "https://api.instagram.com/v1/media/popular?client_id=104b89ecd4154b7888cd4da9d9365ee2&callback=",
+					dataType : "jsonp",
+					success : function(instagramjson) {
+						for (i = 0, j = 10; i < j; i++) {
+							if($(".instagramImages").attr("src") != instagramjson.data[i].images.standard_resolution.url) {
+								$("#loadInstagram").append('<img class="instagramImages" src="' + instagramjson.data[i].images.standard_resolution.url + '" ></img>');
+							}
+						}
+						//var instagram = JSON.parse(data);
+						console.log(instagramjson.data[i].images.standard_resolution.url);
+					}
+				}); 
+			}
 		});
 	});
 
@@ -178,7 +188,6 @@ function onDeviceReady() {
 			navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
 		});
 		$("#imageCamera").click(function() {
-			alert("Button Works!!");
 			var onCamSuccess = function(imageURI) {
 			    $("#images").append('<img class="cameraImage" src="' + imageURI + '"></img>');
 			};
