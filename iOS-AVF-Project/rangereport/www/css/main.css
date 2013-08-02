@@ -1,7 +1,6 @@
 @media all and (orientation: portrait) {  
   body div { width: 100%; }  
-}  
-  
+} 
 @media all and (orientation: landscape) {  
   body div { width: 100%; }  
 } 
@@ -17,6 +16,15 @@ button {
 	margin-left: 10px;
 }
 @media screen and (min-width: 400px) {
+	.instagramImages {
+		display: block;
+		height: 300px;
+		width: 300px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.displayImage {
 		display: block;
 		height: 300px;
@@ -71,6 +79,15 @@ button {
 	}
 }
 @media screen and (min-width: 1000px) {
+	.instagramImages {
+		display: block;
+		height: 600px;
+		width: 600px;
+		margin-top: 1%;
+		margin-bottom: 1%;
+		margin-right: auto;
+		margin-left: auto;
+	}
 	.displayImage {
 		display: block;
 		height: 400px;
