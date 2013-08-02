@@ -156,10 +156,10 @@ function onDeviceReady() {
 
 	$("#instagramPage").on("pageinit", function() {
 		$(".loadInstagramButton").click(function() {
-	//		var networkState = navigator.network.connection.type;
-	//		if(networkState != "wifi") {
-	//			alert("Please Connect to a Wireless Network to Connect to Instagram.");
-	//		} else {
+			var networkState = navigator.network.connection.type;
+			if(networkState != "wifi") {
+				alert("Please Connect to a Wireless Network to Connect to Instagram.");
+			} else {
 				$.ajax({
 					url : "https://api.instagram.com/v1/media/popular?client_id=104b89ecd4154b7888cd4da9d9365ee2&callback=",
 					dataType : "jsonp",
@@ -173,7 +173,7 @@ function onDeviceReady() {
 						console.log(instagramjson.data[i].images.standard_resolution.url);
 					}
 				}); 
-	//		}
+			}
 		});
 	});
 
